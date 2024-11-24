@@ -1,7 +1,6 @@
-package vn.locdung.controllers.vendor;
+package vn.locdung.controllers;
 
 import java.io.IOException;
-import java.util.List;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,10 +9,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import vn.locdung.models.ProductModel;
 import vn.locdung.services.impl.ProductServiceImpl;
-
-@WebServlet(urlPatterns = {"/vendor/home"})
-public class HomeController extends HttpServlet{
-
+@WebServlet(urlPatterns = {"/productDetail"})
+public class ProductController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	public ProductServiceImpl productService = new ProductServiceImpl();
 	@Override
@@ -21,11 +18,14 @@ public class HomeController extends HttpServlet{
 		req.setCharacterEncoding("UTF-8");
 		resp.setCharacterEncoding("UTF-8");
 		String url = req.getRequestURI();
-		if (url.contains("vendor/home")) 
+		if (url.contains("/productDetail")) 
 		{
-        List<ProductModel> productList = productService.findAll();
-        req.setAttribute("productList", productList);
-		req.getRequestDispatcher("/views/home.jsp").forward(req, resp);
+			int productId = Integer.parseInt(req.getParameter("id"));
+            ProductModel product = productService.findById(productId);
+            if (product != null) {
+                req.setAttribute("product", product);
+                req.getRequestDispatcher("/views/detail.jsp").forward(req, resp);
+            }
 		}
 	}
 

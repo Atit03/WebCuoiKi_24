@@ -65,7 +65,7 @@
 					<div class="row">
 						<div class="col-sm-12 text-left menu-1">
 							<ul>
-								<li class="active"><a href="#">Home</a></li>
+								<li class="active"><a href="${pageContext.request.contextPath}/user/home">Home</a></li>
 								<li><a href="#">Product</a></li>
 								
 					

@@ -46,72 +46,20 @@
 	<div class="colorlib-loader"></div>
 
 	<div id="page">
-		<nav class="colorlib-nav" role="navigation">
-			<div class="top-menu">
-				<div class="container">
-					<div class="row">
-						<div class="col-sm-7 col-md-9">
-							<div id="colorlib-logo"><a href="#">UTESHOP</a></div>
-						</div>
-						<div class="col-sm-5 col-md-3">
-			            <form action="#" class="search-wrap">
-			               <div class="form-group">
-			                  <input type="search" class="form-control search" placeholder="Search">
-			                  <button class="btn btn-primary submit-search text-center" type="submit"><i class="icon-search"></i></button>
-			               </div>
-			            </form>
-			         </div>
-		         </div>
-					<div class="row">
-						<div class="col-sm-12 text-left menu-1">
-							<ul>
-								<li class="active"><a href="#">Home</a></li>
-								<li class="has-dropdown">
-									<a href="#">Men</a>
-									<ul class="dropdown">
-										<li><a href="#">Product Detail</a></li>
-										<li><a href="#">Shopping Cart</a></li>
-										<li><a href="#">Checkout</a></li>
-										<li><a href="#">Order Complete</a></li>
-										<li><a href="#">Wishlist</a></li>
-									</ul>
-								</li>
-								<li><a href="#">Women</a></li>
-								<li><a href="#">About</a></li>
-								<li><a href="#">Contact</a></li>
-								
-					
-                        		<li class="cart"><a href="${pageContext.request.contextPath}/login">Login</a></li>
-								<li class="cart"><a href="#"><i class="icon-shopping-cart"></i>Cart [0]</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="sale">
-				<div class="container">
-					<div class="row">
-						<div class="col-sm-8 offset-sm-2 text-center">
-							<div class="row">
-								<div class="owl-carousel2">
-									<div class="item">
-										<div class="col">
-											<h3><a href="#">25% off (Almost) Everything! Use Code: Summer Sale</a></h3>
-										</div>
-									</div>
-									<div class="item">
-										<div class="col">
-											<h3><a href="#">Our biggest sale yet 50% off all summer shoes</a></h3>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</nav>
-
+		<c:choose>
+				<c:when test="${sessionScope.account == null}">
+					<%@ include file="/common/web/header.jsp" %>
+				</c:when>
+				<c:when test="${sessionScope.account != null && sessionScope.account.roleid == 1}">
+					<%@ include file="/common/admin/header.jsp" %>
+				</c:when>
+				<c:when test="${sessionScope.account != null && sessionScope.account.roleid == 2}">
+					<%@ include file="/common/vendor/header.jsp" %>
+				</c:when>
+				<c:otherwise>
+					<%@ include file="/common/user/header.jsp" %>
+				</c:otherwise>
+			</c:choose>
 		<sitemesh:write property="body"/>
 		
 		<footer id="colorlib-footer" role="contentinfo">
@@ -215,7 +163,42 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="${URL}assets/js/jquery.stellar.min.js"></script>
 	<!-- Main -->
 	<script src="${URL}assets/js/main.js"></script>
+	<script>
+		$(document).ready(function(){
 
+		var quantitiy=0;
+		   $('.quantity-right-plus').click(function(e){
+		        
+		        // Stop acting like a button
+		        e.preventDefault();
+		        // Get the field name
+		        var quantity = parseInt($('#quantity').val());
+		        
+		        // If is not undefined
+		            
+		            $('#quantity').val(quantity + 1);
+
+		          
+		            // Increment
+		        
+		    });
+
+		     $('.quantity-left-minus').click(function(e){
+		        // Stop acting like a button
+		        e.preventDefault();
+		        // Get the field name
+		        var quantity = parseInt($('#quantity').val());
+		        
+		        // If is not undefined
+		      
+		            // Increment
+		            if(quantity>0){
+		            $('#quantity').val(quantity - 1);
+		            }
+		    });
+		    
+		});
+	</script>
 	</body>
 </html>
 

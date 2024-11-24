@@ -31,8 +31,21 @@
 
 
 						<li class="cart"><a
-							href="${pageContext.request.contextPath}/login">Login</a></li>
-
+							href="${pageContext.request.contextPath}/logout">Logout</a></li>
+						<li class="cart">|</li>
+						<li class="cart"><a href="#">${account.username}</a></li>
+						<c:choose>
+							<c:when test="${sessionScope.checkShop == 0}">
+								<li class="cart"><a
+									href="${pageContext.request.contextPath}/registerShop">Đăng
+										Kí Shop</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="cart"><a
+									href="${pageContext.request.contextPath}/manageShop">Quản
+										Lý Shop</a></li>
+							</c:otherwise>
+						</c:choose>
 						<li class="cart"><a href="#"><i
 								class="icon-shopping-cart"></i> Cart [0]</a></li>
 					</ul>

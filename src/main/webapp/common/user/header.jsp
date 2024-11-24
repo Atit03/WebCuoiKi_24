@@ -31,8 +31,9 @@
 
 
 						<li class="cart"><a
-							href="${pageContext.request.contextPath}/login">Login</a></li>
-
+							href="${pageContext.request.contextPath}/logout">Logout</a></li>
+						<li class="cart">|</li>
+						<li class="cart"><a href="#">${account.username}</a></li>
 						<li class="cart"><a href="#"><i
 								class="icon-shopping-cart"></i> Cart [0]</a></li>
 					</ul>
