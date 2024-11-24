@@ -5,26 +5,32 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnectMySQL {
-	private static String USERNAME = "root";
-	private static String PASSWORD = "170604";
-	private static String DRIVER = "com.mysql.cj.jdbc.Driver";
-	private static String URL = "jdbc:mysql://localhost:3306/ltwebst2";
+	private final String USERNAME = "root";
+	private final String PASSWORD = "170604";
+	private final String DRIVER = "com.mysql.cj.jdbc.Driver";
+	private final String URL = "jdbc:mysql://localhost:3306/uteshop";
 
-	public static Connection getDatabaseConnection() throws SQLException, Exception{
-	    try {
+	public Connection getDatabaseConnection() throws SQLException{
+		try {
 	    	Class.forName(DRIVER);
 			return DriverManager.getConnection(URL,USERNAME,PASSWORD);
+		} catch (ClassNotFoundException e) {
+        throw new SQLException("JDBC Driver không tìm thấy.", e);
 		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	public static void main(String[] args){
-		try {
-			new DBConnectMySQL();
-			System.out.println(DBConnectMySQL.getDatabaseConnection());
-		}catch(Exception e) {
-			e.printStackTrace();
+        throw new SQLException("Không thể kết nối đến cơ sở dữ liệu.", e);
 		}
 	}
+	public static void main(String[] args) {
+	    DBConnectMySQL dbConnect = new DBConnectMySQL();
+	    try (Connection connection = dbConnect.getDatabaseConnection()) {
+	        if (connection != null) {
+	            System.out.println("Kết nối thành công!");
+	        } else {
+	            System.out.println("Kết nối thất bại!");
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+
 }
