@@ -31,23 +31,23 @@
 					<div class="input-group mb-4">
 						<span class="input-group-btn">
 							<button type="button" class="quantity-left-minus btn"
-								data-type="minus" data-field="">
-								<i class="icon-minus2"></i>
+								data-type="minus" data-field="" style="padding: 11px;">
+								<span class="material-symbols-outlined" style="font-size: 23px; vertical-align: middle; line-height: 1; padding: 0; margin: 0;">arrow_circle_down</span>
 							</button>
 						</span> <input type="text" id="quantity" name="quantity"
 							class="form-control input-number" value="1" min="1" max="100">
 						<span class="input-group-btn ml-1">
 							<button type="button" class="quantity-right-plus btn"
-								data-type="plus" data-field="">
-								<i class="icon-plus2"></i>
+								data-type="plus" data-field="" style="padding: 11px;">
+								<span class="material-symbols-outlined" style="font-size: 23px; vertical-align: middle; line-height: 1; padding: 0; margin: 0;">arrow_circle_up</span>
 							</button>
 						</span>
 					</div>
 					<div class="row">
 						<div class="col-sm-12 text-center">
 							<p class="addtocart">
-								<a href="cart.html" class="btn btn-primary btn-addtocart"><i
-									class="icon-shopping-cart"></i> Add to Cart</a>
+								<a href="cart.html" class="btn btn-primary btn-addtocart">
+								<span class="material-symbols-outlined" style="font-size: 14px;">add_shopping_cart</span></i> Add to Cart</a>
 							</p>
 						</div>
 					</div>

@@ -16,7 +16,7 @@
 								placeholder="Search">
 							<button class="btn btn-primary submit-search text-center"
 								type="submit">
-								<i class="icon-search"></i>
+								<span class="material-symbols-outlined" style="margin-top: 6px;"> search</span>
 							</button>
 						</div>
 					</form>
@@ -33,8 +33,10 @@
 						<li class="cart"><a
 							href="${pageContext.request.contextPath}/login">Login</a></li>
 
-						<li class="cart"><a href="#"><i
-								class="icon-shopping-cart"></i> Cart [0]</a></li>
+						<li class="cart">
+						<a href="#"><span class="material-symbols-outlined" style="font-size: 16px;vertical-align: middle; line-height: 1; margin-top: -5px;">
+shopping_cart
+</span> Cart [0]</a></li>
 					</ul>
 				</div>
 			</div>
