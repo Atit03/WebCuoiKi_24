@@ -11,6 +11,7 @@ public class UserModel implements Serializable{
 	private String email;
 	private String phone;
 	private int roleid;
+	private String rolename;
 	private boolean isactive;
 	public UserModel() {
 		super();
@@ -25,6 +26,16 @@ public class UserModel implements Serializable{
 		this.phone = phone;
 		this.roleid = roleid;
 		this.isactive = isactive;
+	}
+	
+	public UserModel(int userid, String username, String email, String phone, int roleid, String rolename) {
+		super();
+		this.userid = userid;
+		this.username = username;
+		this.email = email;
+		this.phone = phone;
+		this.roleid = roleid;
+		this.rolename = rolename;
 	}
 	public int getUserid() {
 		return userid;
@@ -68,11 +79,18 @@ public class UserModel implements Serializable{
 	public void setIsactive(boolean isactive) {
 		this.isactive = isactive;
 	}
+	public String getRolename() {
+		return rolename;
+	}
+	public void setRolename(String rolename) {
+		this.rolename = rolename;
+	}
 	@Override
 	public String toString() {
 		return "UserModel [userid=" + userid + ", username=" + username + ", password=" + password + ", email=" + email
-				+ ", phone=" + phone + ", roleid=" + roleid + ", isactive=" + isactive + "]";
+				+ ", phone=" + phone + ", roleid=" + roleid + ", rolename=" + rolename + ", isactive=" + isactive + "]";
 	}
+	
 	
 
 }

@@ -27,15 +27,16 @@
 					<ul>
 						<li class="active"><a
 							href="${pageContext.request.contextPath}/home">Home</a></li>
-						<li><a href="#">Product</a></li>
+						<li><a href="${pageContext.request.contextPath}/admin/user">Quản lý User</a></li>
+						<li><a href="#">Quản lý Shop</a></li>
+						<li><a href="#">Quản lý khuyến mãi</a></li>
+						<li><a href="#">Quản lý doanh mục</a></li>
 
 						<li class="cart"><a
 							href="${pageContext.request.contextPath}/logout">Logout</a></li>
 						<li class="cart">|</li>
 						<li class="cart"><a href="#">${account.username}</a></li>
 						<li class="cart"><a href="#">Trang Quản Trị</a></li>
-						<li class="cart"><a href="#"><i
-								class="icon-shopping-cart"></i> Cart [0]</a></li>
 					</ul>
 				</div>
 			</div>

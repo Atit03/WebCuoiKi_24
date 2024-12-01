@@ -40,4 +40,19 @@ public class UserServiceImpl implements IUserService{
 		return null;
 	}
 
+	@Override
+	public List<UserModel> findUser(int page, int limit) {
+		return useDao.findUser(page,limit);
+	}
+
+	@Override
+	public int countUser() {
+		return useDao.countUser();
+	}
+
+	@Override
+	public void delete(int id) {
+		useDao.delete(id);
+	}
+
 }
