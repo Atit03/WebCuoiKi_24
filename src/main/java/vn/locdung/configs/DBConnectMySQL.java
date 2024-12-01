@@ -6,11 +6,11 @@ import java.sql.SQLException;
 
 public class DBConnectMySQL {
 	private final String USERNAME = "root";
-	private final String PASSWORD = "170604";
+	private final String PASSWORD = "locthuong123";
 	private final String DRIVER = "com.mysql.cj.jdbc.Driver";
 	private final String URL = "jdbc:mysql://localhost:3306/uteshop";
 
-	public Connection getDatabaseConnection() throws SQLException{
+	public Connection getConnection() throws SQLException{
 		try {
 	    	Class.forName(DRIVER);
 			return DriverManager.getConnection(URL,USERNAME,PASSWORD);
@@ -22,7 +22,7 @@ public class DBConnectMySQL {
 	}
 	public static void main(String[] args) {
 	    DBConnectMySQL dbConnect = new DBConnectMySQL();
-	    try (Connection connection = dbConnect.getDatabaseConnection()) {
+	    try (Connection connection = dbConnect.getConnection()) {
 	        if (connection != null) {
 	            System.out.println("Kết nối thành công!");
 	        } else {
