@@ -55,9 +55,6 @@
 				<c:when test="${sessionScope.account != null && sessionScope.account.roleid == 1}">
 					<%@ include file="/common/admin/header.jsp" %>
 				</c:when>
-				<c:when test="${sessionScope.account != null && sessionScope.account.roleid == 2}">
-					<%@ include file="/common/vendor/header.jsp" %>
-				</c:when>
 				<c:otherwise>
 					<%@ include file="/common/user/header.jsp" %>
 				</c:otherwise>
