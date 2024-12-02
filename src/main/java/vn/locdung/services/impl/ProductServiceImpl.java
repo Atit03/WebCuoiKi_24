@@ -33,5 +33,37 @@ public class ProductServiceImpl implements IProductService{
 	public int getTotalProductsByCategoryW(int categoryId) {
 		return productDao.getTotalProductsByCategoryW(categoryId);
 	}
+	@Override
+	public List<ProductModel> findAllMen(int page, int pageSize) {
+		return productDao.findAllMen(page, pageSize);
+	}
+	@Override
+	public List<ProductModel> findAllWomen(int page, int pageSize) {
+		return productDao.findAllWomen(page, pageSize);
+	}
+	@Override
+	public int getTotalProductsMen() {
+		return productDao.getTotalProductsMen();
+	}
+	@Override
+	public int getTotalProductsWomen() {
+		return productDao.getTotalProductsWomen();
+	}
+	@Override
+	public List<ProductModel> getProductsNewM() {
+		return productDao.getProductsNewM();
+	}
+	@Override
+	public List<ProductModel> getProductsNewW() {
+		return productDao.getProductsNewW();
+	}
+	@Override
+	public List<ProductModel> getProductsBestSellerM() {
+		return productDao.getProductsBestSellerM();
+	}
+	@Override
+	public List<ProductModel> getProductsBestSellerW() {
+		return productDao.getProductsBestSellerW();
+	}
 
 }

@@ -14,8 +14,12 @@ import vn.locdung.models.CategoryModel;
 import vn.locdung.models.ProductModel;
 import vn.locdung.services.impl.ProductServiceImpl;
 
-@WebServlet(urlPatterns = { "/men", "/categoryM", "/newM", "/bestsellerM" })
-public class MenController extends HttpServlet {
+@WebServlet(urlPatterns = { "/women", "/categoryW" , "/newW" , "/bestsellerW"})
+public class Womencontroller extends HttpServlet {
+
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 	ICategoryDao cateDao = new CategoryDaoImpl();
 	public ProductServiceImpl productService = new ProductServiceImpl();
@@ -26,15 +30,15 @@ public class MenController extends HttpServlet {
 		resp.setCharacterEncoding("UTF-8");
 
 		String url = req.getRequestURI();
-		if (url.contains("/men")) {
+		if (url.contains("/women")) {
 			String pageStr = req.getParameter("page");
 
 			int page = pageStr == null ? 1 : Integer.parseInt(pageStr);
 			int pageSize = 6; // Số sản phẩm mỗi trang
 
 			List<CategoryModel> lcate = cateDao.findAll();
-			List<ProductModel> lproduct = productService.findAllMen(page, pageSize);
-			int totalProducts = productService.getTotalProductsMen();
+			List<ProductModel> lproduct = productService.findAllWomen(page, pageSize);
+			int totalProducts = productService.getTotalProductsWomen();
 			int totalPages = (int) Math.ceil((double) totalProducts / pageSize);
 
 			req.setAttribute("lcate", lcate);
@@ -42,8 +46,8 @@ public class MenController extends HttpServlet {
 
 			req.setAttribute("currentPage", page);
 			req.setAttribute("totalPages", totalPages);
-			req.getRequestDispatcher("/views/men.jsp").forward(req, resp);
-		} else if (url.contains("/categoryM")) {
+			req.getRequestDispatcher("/views/women.jsp").forward(req, resp);
+		} else if (url.contains("/categoryW")) {
 			String cid = req.getParameter("cid");
 			String pageStr = req.getParameter("page");
 
@@ -52,8 +56,8 @@ public class MenController extends HttpServlet {
 			int pageSize = 6; // Số sản phẩm mỗi trang
 
 			List<CategoryModel> lcate = cateDao.findAll();
-			List<ProductModel> lproduct = productService.getProductsByCategoryM(categoryId, page, pageSize);
-			int totalProducts = productService.getTotalProductsByCategoryM(categoryId);
+			List<ProductModel> lproduct = productService.getProductsByCategoryW(categoryId, page, pageSize);
+			int totalProducts = productService.getTotalProductsByCategoryW(categoryId);
 			int totalPages = (int) Math.ceil((double) totalProducts / pageSize);
 
 			req.setAttribute("lcate", lcate);
@@ -61,23 +65,24 @@ public class MenController extends HttpServlet {
 			// System.out.println(lproduct);
 			req.setAttribute("currentPage", page);
 			req.setAttribute("totalPages", totalPages);
-			req.getRequestDispatcher("/views/men.jsp").forward(req, resp);
-		} else if (url.contains("/newM")) {
+			req.getRequestDispatcher("/views/women.jsp").forward(req, resp);
+		} else if (url.contains("/newW")) {
 			List<CategoryModel> lcate = cateDao.findAll();
-			List<ProductModel> lproduct = productService.getProductsNewM();
+			List<ProductModel> lproduct = productService.getProductsNewW();
 			
 			req.setAttribute("lcate", lcate);
 			req.setAttribute("lproduct", lproduct);
 
-			req.getRequestDispatcher("/views/men.jsp").forward(req, resp);
-		} else if (url.contains("/bestsellerM")) {
+			req.getRequestDispatcher("/views/women.jsp").forward(req, resp);
+		} else if (url.contains("/bestsellerW")) {
 			List<CategoryModel> lcate = cateDao.findAll();
-			List<ProductModel> lproduct = productService.getProductsBestSellerM();
+			List<ProductModel> lproduct = productService.getProductsBestSellerW();
 			
 			req.setAttribute("lcate", lcate);
 			req.setAttribute("lproduct", lproduct);
 
-			req.getRequestDispatcher("/views/men.jsp").forward(req, resp);
+			req.getRequestDispatcher("/views/women.jsp").forward(req, resp);
 		}
 	}
+
 }

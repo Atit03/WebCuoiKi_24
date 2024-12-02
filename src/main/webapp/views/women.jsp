@@ -11,7 +11,7 @@
 				</div>
 				<div class="menu text-center">
 					<p>
-						<a href="#">New Arrivals</a> <a href="#">Best Sellers</a> 
+						<a href="${pageContext.request.contextPath}/newW">New Products</a> <a href="${pageContext.request.contextPath}/bestsellerW">Best Sellers</a>
 					</p>
 				</div>
 			</div>
@@ -100,14 +100,34 @@
 						<div class="block-27">
 							<ul>
 								<c:if test="${currentPage > 1}">
-									<li><a href="${pageContext.request.contextPath}/categoryW?cid=${param.cid}&page=${currentPage - 1}">&lt;</a></li>
+									<c:if test="${param.cid != null}">
+										<li><a
+											href="${pageContext.request.contextPath}/categoryW?cid=${param.cid}&page=${currentPage - 1}">&lt;</a></li>
+									</c:if>
+									<c:if test="${param.cid == null}">
+										<li><a
+											href="${pageContext.request.contextPath}/women?page=${currentPage - 1}">&lt;</a></li>
+									</c:if>
 								</c:if>
 								<c:forEach var="i" begin="1" end="${totalPages}">
-									<li class="${i == currentPage ? 'active' : ''}"><a
-										href="${pageContext.request.contextPath}/categoryW?cid=${param.cid}&page=${i}">${i}</a></li>
+									<li class="${i == currentPage ? 'active' : ''}">
+										<c:if test="${param.cid != null}">
+										<a href="${pageContext.request.contextPath}/categoryW?cid=${param.cid}&page=${i}">${i}</a>
+										</c:if>
+										<c:if test="${param.cid == null}">
+										<a href="${pageContext.request.contextPath}/women?page=${i}">${i}</a>
+										</c:if>
+									</li>
 								</c:forEach>
 								<c:if test="${currentPage < totalPages}">
-									<li><a href="${pageContext.request.contextPath}/categoryW?cid=${param.cid}&page=${currentPage + 1}">&gt;</a></li>
+									<c:if test="${param.cid != null}">
+										<li><a
+											href="${pageContext.request.contextPath}/categoryW?cid=${param.cid}&page=${currentPage + 1}">&gt;</a></li>
+									</c:if>
+									<c:if test="${param.cid == null}">
+										<li><a
+											href="${pageContext.request.contextPath}/women?page=${currentPage + 1}">&gt;</a></li>
+									</c:if>
 								</c:if>
 							</ul>
 						</div>
