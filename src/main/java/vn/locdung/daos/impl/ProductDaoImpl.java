@@ -17,11 +17,8 @@ public class ProductDaoImpl implements IProductDao {
 	public List<ProductModel> findAll() {
 		String sqll = "SELECT p.Productid, p.Productname, p.Price, pi.Imageurl\r\n" + "FROM products p\r\n"
 				+ "JOIN productimages pi ON p.Productid = pi.Productid\r\n" + "WHERE pi.Isprimary = TRUE;";
-		String sql = "SELECT p.Productid, p.Productname, p.Price, pi.Imageurl " +
-	             "FROM products p " +
-	             "JOIN productimages pi ON p.Productid = pi.Productid " +
-	             "WHERE pi.Isprimary = TRUE " +
-	             "LIMIT 12;";
+		String sql = "SELECT p.Productid, p.Productname, p.Price, pi.Imageurl " + "FROM products p "
+				+ "JOIN productimages pi ON p.Productid = pi.Productid " + "WHERE pi.Isprimary = TRUE " + "LIMIT 12;";
 
 		List<ProductModel> list = new ArrayList<>();
 
@@ -51,12 +48,10 @@ public class ProductDaoImpl implements IProductDao {
 
 	@Override
 	public ProductModel findById(int id) {
-		String sql = "SELECT \r\n"
-				+ "            p.Productid, p.Productname, p.Price, p.Description, \r\n"
+		String sql = "SELECT \r\n" + "            p.Productid, p.Productname, p.Price, p.Description, \r\n"
 				+ "            pi.Imageurl, pi.Isprimary, \r\n"
 				+ "            (SELECT COUNT(*) FROM Reviews r WHERE r.Productid = p.Productid) AS Ratingcount\r\n"
-				+ "        FROM Products p\r\n"
-				+ "        JOIN ProductImages pi ON p.Productid = pi.Productid\r\n"
+				+ "        FROM Products p\r\n" + "        JOIN ProductImages pi ON p.Productid = pi.Productid\r\n"
 				+ "        WHERE p.Productid = ?";
 		try (Connection conn = new DBConnectMySQL().getDatabaseConnection();
 				PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -71,9 +66,9 @@ public class ProductDaoImpl implements IProductDao {
 				while (rs.next()) {
 					if (product == null) {
 						// Tạo đối tượng ProductModel ban đầu
-						product = new ProductModel(rs.getInt("Productid"), rs.getString("Productname"),rs.getString("Description"),
-								rs.getBigDecimal("Price"),rs.getInt("Ratingcount"),
-								rs.getString("Imageurl"),images); // Ảnh chính ban đầu
+						product = new ProductModel(rs.getInt("Productid"), rs.getString("Productname"),
+								rs.getString("Description"), rs.getBigDecimal("Price"), rs.getInt("Ratingcount"),
+								rs.getString("Imageurl"), images); // Ảnh chính ban đầu
 					}
 
 					// Lưu ảnh chính nếu Isprimary = TRUE
@@ -99,6 +94,122 @@ public class ProductDaoImpl implements IProductDao {
 			return null; // hoặc bạn có thể ném ngoại lệ tùy theo yêu cầu
 		}
 
+	}
+
+	@Override
+	public List<ProductModel> getProductsByCategoryM(int categoryId, int page, int pageSize) {
+		List<ProductModel> products = new ArrayList<>();
+
+		// Kiểm tra đầu vào
+		if (page < 1 || pageSize <= 0) {
+			throw new IllegalArgumentException("Invalid page or pageSize value.");
+		}
+
+		String sql = "SELECT p.Productid, p.Productname, p.Price, pi.Imageurl " + "FROM products p "
+				+ "JOIN productimages pi ON p.Productid = pi.Productid "
+				+ "WHERE pi.Isprimary = TRUE AND p.Categoryid = ? AND p.Gender='Men'" + "LIMIT ? OFFSET ?";
+
+		try (Connection conn = new DBConnectMySQL().getDatabaseConnection();
+				PreparedStatement ps = conn.prepareStatement(sql)) {
+
+			ps.setInt(1, categoryId);
+			ps.setInt(2, pageSize);
+			ps.setInt(3, (page - 1) * pageSize);
+
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
+					ProductModel product = new ProductModel();
+					product.setProductid(rs.getInt("Productid"));
+					product.setProductname(rs.getString("Productname"));
+					product.setPrice(rs.getBigDecimal("Price"));
+					product.setImage(rs.getString("Imageurl"));
+
+					// Thêm sản phẩm vào danh sách
+					products.add(product);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace(); // Nên thay bằng log trong môi trường sản xuất
+			throw new RuntimeException("Database query error: " + e.getMessage(), e);
+		}
+
+		return products;
+	}
+
+	@Override
+	public int getTotalProductsByCategoryM(int categoryId) {
+		String sql = "SELECT COUNT(*) AS total FROM products WHERE Categoryid = ? AND Gender='Men'";
+		try (Connection conn = new DBConnectMySQL().getDatabaseConnection();
+				PreparedStatement ps = conn.prepareStatement(sql)) {
+			ps.setInt(1, categoryId);
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+					return rs.getInt("total");
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Database query error: " + e.getMessage(), e);
+		}
+		return 0;
+	}
+
+	@Override
+	public List<ProductModel> getProductsByCategoryW(int categoryId, int page, int pageSize) {
+		List<ProductModel> products = new ArrayList<>();
+
+		// Kiểm tra đầu vào
+		if (page < 1 || pageSize <= 0) {
+			throw new IllegalArgumentException("Invalid page or pageSize value.");
+		}
+
+		String sql = "SELECT p.Productid, p.Productname, p.Price, pi.Imageurl " + "FROM products p "
+				+ "JOIN productimages pi ON p.Productid = pi.Productid "
+				+ "WHERE pi.Isprimary = TRUE AND p.Categoryid = ? AND p.Gender='Woman'" + "LIMIT ? OFFSET ?";
+
+		try (Connection conn = new DBConnectMySQL().getDatabaseConnection();
+				PreparedStatement ps = conn.prepareStatement(sql)) {
+
+			ps.setInt(1, categoryId);
+			ps.setInt(2, pageSize);
+			ps.setInt(3, (page - 1) * pageSize);
+
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
+					ProductModel product = new ProductModel();
+					product.setProductid(rs.getInt("Productid"));
+					product.setProductname(rs.getString("Productname"));
+					product.setPrice(rs.getBigDecimal("Price"));
+					product.setImage(rs.getString("Imageurl"));
+
+					// Thêm sản phẩm vào danh sách
+					products.add(product);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace(); // Nên thay bằng log trong môi trường sản xuất
+			throw new RuntimeException("Database query error: " + e.getMessage(), e);
+		}
+
+		return products;
+	}
+
+	@Override
+	public int getTotalProductsByCategoryW(int categoryId) {
+		String sql = "SELECT COUNT(*) AS total FROM products WHERE Categoryid = ? AND Gender='Woman'";
+		try (Connection conn = new DBConnectMySQL().getDatabaseConnection();
+				PreparedStatement ps = conn.prepareStatement(sql)) {
+			ps.setInt(1, categoryId);
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+					return rs.getInt("total");
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Database query error: " + e.getMessage(), e);
+		}
+		return 0;
 	}
 
 }

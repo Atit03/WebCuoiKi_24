@@ -10,7 +10,7 @@
                         <div class="item">
                             <div class="product-entry border">
                                 <a href="#" class="prod-img">
-                                    <img src="<c:url value='/image?fname=${image}'/>" class="img-fluid" alt="Product Image">
+                                    <img src="${image}" class="img-fluid" alt="Product Image">
                                 </a>
                             </div>
                         </div>

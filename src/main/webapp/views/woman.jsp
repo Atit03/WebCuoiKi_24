@@ -6,8 +6,8 @@
 		<div class="row">
 			<div class="col">
 				<div class="breadcrumbs-img"
-					style="background-image: url(${URL}assets/images/nenn.jpg);">
-					<h2 style="color: red;">Men's</h2>
+					style="background-image: url(${URL}assets/images/cover-img-1.jpg);">
+					<h2>WoMan's</h2>
 				</div>
 				<div class="menu text-center">
 					<p>
@@ -25,7 +25,7 @@
 			<div class="col-sm-4 text-center">
 				<div class="featured">
 					<div class="featured-img featured-img-2"
-						style="background-image: url(${URL}assets/images/ThuongNam.jpg);">
+						style="background-image: url(${URL}assets/images/img_bg_2.jpg);">
 						<h2>Casuals</h2>
 						
 					</div>
@@ -34,7 +34,7 @@
 			<div class="col-sm-4 text-center">
 				<div class="featured">
 					<div class="featured-img featured-img-2"
-						style="background-image: url(${URL}assets/images/CongsoNam.jpg);">
+						style="background-image: url(${URL}assets/images/women.jpg);">
 						<h2>Dress</h2>
 						
 					</div>
@@ -45,7 +45,7 @@
 					<div class="featured-img featured-img-2"
 						style="background-image: url(${URL}assets/images/item-11.jpg);">
 						<h2>Sports</h2>
-					
+						
 					</div>
 				</div>
 			</div>
@@ -64,7 +64,7 @@
 							<ul>
 								<c:forEach var="cate" items="${lcate}">
 									<li><a
-										href="${pageContext.request.contextPath}/categoryM?cid=${cate.categoryid}">${cate.categoryname}</a></li>
+										href="${pageContext.request.contextPath}/categoryW?cid=${cate.categoryid}">${cate.categoryname}</a></li>
 								</c:forEach>
 							</ul>
 
@@ -100,14 +100,14 @@
 						<div class="block-27">
 							<ul>
 								<c:if test="${currentPage > 1}">
-									<li><a href="${pageContext.request.contextPath}/categoryM?cid=${param.cid}&page=${currentPage - 1}">&lt;</a></li>
+									<li><a href="${pageContext.request.contextPath}/categoryW?cid=${param.cid}&page=${currentPage - 1}">&lt;</a></li>
 								</c:if>
 								<c:forEach var="i" begin="1" end="${totalPages}">
 									<li class="${i == currentPage ? 'active' : ''}"><a
-										href="${pageContext.request.contextPath}/categoryM?cid=${param.cid}&page=${i}">${i}</a></li>
+										href="${pageContext.request.contextPath}/categoryW?cid=${param.cid}&page=${i}">${i}</a></li>
 								</c:forEach>
 								<c:if test="${currentPage < totalPages}">
-									<li><a href="${pageContext.request.contextPath}/categoryM?cid=${param.cid}&page=${currentPage + 1}">&gt;</a></li>
+									<li><a href="${pageContext.request.contextPath}/categoryW?cid=${param.cid}&page=${currentPage + 1}">&gt;</a></li>
 								</c:if>
 							</ul>
 						</div>

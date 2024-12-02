@@ -16,17 +16,17 @@
 				<div class="row">
 					<div class="col-sm-6 text-center">
 						<div class="featured">
-							<a href="#" class="featured-img" style="background-image: url(${URL}assets/images/men.jpg);"></a>
+							<a href="${pageContext.request.contextPath}/men" class="featured-img" style="background-image: url(${URL}assets/images/men.jpg);"></a>
 							<div class="desc">
-								<h2><a href="#">Shop Men's Collection</a></h2>
+								<h2><a href="${pageContext.request.contextPath}/men">Shop Men's Collection</a></h2>
 							</div>
 						</div>
 					</div>
 					<div class="col-sm-6 text-center">
 						<div class="featured">
-							<a href="#" class="featured-img" style="background-image: url(${URL}assets/images/women.jpg);"></a>
+							<a href="${pageContext.request.contextPath}/woman" class="featured-img" style="background-image: url(${URL}assets/images/women.jpg);"></a>
 							<div class="desc">
-								<h2><a href="#">Shop Women's Collection</a></h2>
+								<h2><a href="${pageContext.request.contextPath}/woman">Shop Women's Collection</a></h2>
 							</div>
 						</div>
 					</div>
