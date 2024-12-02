@@ -6,15 +6,15 @@
 		<div class="row row-pb-lg product-detail-wrap">
 			<div class="col-sm-8">
 				<div class="owl-carousel">
-                    <c:forEach var="image" items="${product.images}">
-                        <div class="item">
-                            <div class="product-entry border">
-                                <a href="#" class="prod-img">
-                                    <img src="${image}" class="img-fluid" alt="Product Image">
-                                </a>
-                            </div>
-                        </div>
-                    </c:forEach>
+					<c:forEach var="image" items="${product.images}">
+						<div class="item">
+							<div class="product-entry border">
+								<a href="#" class="prod-img"> <img src="${image}"
+									class="img-fluid" alt="Product Image">
+								</a>
+							</div>
+						</div>
+					</c:forEach>
 				</div>
 			</div>
 			<div class="col-sm-4">
@@ -32,23 +32,28 @@
 						<span class="input-group-btn">
 							<button type="button" class="quantity-left-minus btn"
 								data-type="minus" data-field="" style="padding: 11px;">
-								<span class="material-symbols-outlined" style="font-size: 23px; vertical-align: middle; line-height: 1; padding: 0; margin: 0;">arrow_circle_down</span>
+								<span class="material-symbols-outlined"
+									style="font-size: 23px; vertical-align: middle; line-height: 1; padding: 0; margin: 0;">arrow_circle_down</span>
 							</button>
 						</span> <input type="text" id="quantity" name="quantity"
 							class="form-control input-number" value="1" min="1" max="100">
 						<span class="input-group-btn ml-1">
 							<button type="button" class="quantity-right-plus btn"
 								data-type="plus" data-field="" style="padding: 11px;">
-								<span class="material-symbols-outlined" style="font-size: 23px; vertical-align: middle; line-height: 1; padding: 0; margin: 0;">arrow_circle_up</span>
+								<span class="material-symbols-outlined"
+									style="font-size: 23px; vertical-align: middle; line-height: 1; padding: 0; margin: 0;">arrow_circle_up</span>
 							</button>
 						</span>
 					</div>
 					<div class="row">
 						<div class="col-sm-12 text-center">
 							<p class="addtocart">
-								<a href="cart.html" class="btn btn-primary btn-addtocart">
-								<span class="material-symbols-outlined" style="font-size: 14px;">add_shopping_cart</span></i> Add to Cart</a>
+								<button type="button" class="btn btn-primary btn-addtocart">
+									<span class="material-symbols-outlined"
+										style="font-size: 14px;">add_shopping_cart</span> Add to Cart
+								</button>
 							</p>
+
 						</div>
 					</div>
 				</div>

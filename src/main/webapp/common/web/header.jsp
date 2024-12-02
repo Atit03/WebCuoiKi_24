@@ -10,9 +10,9 @@
 					</div>
 				</div>
 				<div class="col-sm-5 col-md-3">
-					<form action="#" class="search-wrap">
+					<form action="${pageContext.request.contextPath}/search" method ="post" class="search-wrap">
 						<div class="form-group">
-							<input type="search" class="form-control search"
+							<input name="keyword" type="search" class="form-control search"
 								placeholder="Search">
 							<button class="btn btn-primary submit-search text-center"
 								type="submit">
@@ -39,7 +39,7 @@
 						<li class="cart">
 						<a href="#"><span class="material-symbols-outlined" style="font-size: 16px;vertical-align: middle; line-height: 1; margin-top: -5px;">
 shopping_cart
-</span> Cart [0]</a></li>
+</span> Cart </a></li>
 					</ul>
 				</div>
 			</div>

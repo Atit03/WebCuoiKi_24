@@ -444,5 +444,38 @@ public class ProductDaoImpl implements IProductDao {
 		return list;
 	}
 
+	@Override
+	public List<ProductModel> search(String keyword) {
+		String sql = "SELECT p.Productid, p.Productname, p.Price, pi.Imageurl " + "FROM products p "
+				+ "JOIN productimages pi ON p.Productid = pi.Productid " + "WHERE pi.Isprimary = TRUE AND (p.Productname LIKE ? OR p.Description LIKE ?)";
+
+		List<ProductModel> list = new ArrayList<>();
+
+		try (Connection conn = new DBConnectMySQL().getDatabaseConnection();
+				PreparedStatement ps = conn.prepareStatement(sql);
+				) {
+			ps.setString(1, "%" + keyword + "%");
+            ps.setString(2, "%" + keyword + "%");
+            ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				ProductModel product = new ProductModel();
+				product.setProductid(rs.getInt("Productid"));
+				product.setProductname(rs.getString("Productname"));
+				product.setPrice(rs.getBigDecimal("Price"));
+				product.setImage(rs.getString("Imageurl"));
+
+				// Thêm người dùng vào danh sách
+				list.add(product);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
 
 }

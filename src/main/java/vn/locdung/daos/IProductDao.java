@@ -25,4 +25,6 @@ public interface IProductDao {
 	
 	List<ProductModel> getProductsBestSellerM();
 	List<ProductModel> getProductsBestSellerW();
+	
+	List<ProductModel> search(String keyword);
 }
