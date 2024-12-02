@@ -24,6 +24,7 @@ public class HomeController extends HttpServlet{
 		if (url.contains("/home")) 
 		{
         List<ProductModel> productList = productService.findAll();
+        //System.out.println(productList);
         req.setAttribute("productList", productList);
 		req.getRequestDispatcher("/views/home.jsp").forward(req, resp);
 		}

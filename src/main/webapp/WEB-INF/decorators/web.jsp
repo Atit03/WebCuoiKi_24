@@ -60,7 +60,7 @@
 				</c:otherwise>
 			</c:choose>
 		<sitemesh:write property="body"/>
-		
+		<%@ include file="/common/web/brand.jsp" %>
 		<footer id="colorlib-footer" role="contentinfo">
 			<div class="container">
 				<div class="row row-pb-md">

@@ -15,8 +15,14 @@ public class ProductDaoImpl implements IProductDao {
 
 	@Override
 	public List<ProductModel> findAll() {
-		String sql = "SELECT p.Productid, p.Productname, p.Price, pi.Imageurl\r\n" + "FROM products p\r\n"
+		String sqll = "SELECT p.Productid, p.Productname, p.Price, pi.Imageurl\r\n" + "FROM products p\r\n"
 				+ "JOIN productimages pi ON p.Productid = pi.Productid\r\n" + "WHERE pi.Isprimary = TRUE;";
+		String sql = "SELECT p.Productid, p.Productname, p.Price, pi.Imageurl " +
+	             "FROM products p " +
+	             "JOIN productimages pi ON p.Productid = pi.Productid " +
+	             "WHERE pi.Isprimary = TRUE " +
+	             "LIMIT 12;";
+
 		List<ProductModel> list = new ArrayList<>();
 
 		try (Connection conn = new DBConnectMySQL().getDatabaseConnection();

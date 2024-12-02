@@ -1,22 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-	<!-- BEGIN BRANDS -->
-    <div class="brands">
-      <div class="container">
-            <div class="owl-carousel owl-carousel6-brands">
-              <a href="shop-product-list.html"><img src="${URL}assets/frontend/pages/img/brands/canon.jpg" alt="canon" title="canon"></a>
-              <a href="shop-product-list.html"><img src="${URL}assets/frontend/pages/img/brands/esprit.jpg" alt="esprit" title="esprit"></a>
-              <a href="shop-product-list.html"><img src="${URL}assets/frontend/pages/img/brands/gap.jpg" alt="gap" title="gap"></a>
-              <a href="shop-product-list.html"><img src="${URL}assets/frontend/pages/img/brands/next.jpg" alt="next" title="next"></a>
-              <a href="shop-product-list.html"><img src="${URL}assets/frontend/pages/img/brands/puma.jpg" alt="puma" title="puma"></a>
-              <a href="shop-product-list.html"><img src="${URL}assets/frontend/pages/img/brands/zara.jpg" alt="zara" title="zara"></a>
-              <a href="shop-product-list.html"><img src="${URL}assets/frontend/pages/img/brands/canon.jpg" alt="canon" title="canon"></a>
-              <a href="shop-product-list.html"><img src="${URL}assets/frontend/pages/img/brands/esprit.jpg" alt="esprit" title="esprit"></a>
-              <a href="shop-product-list.html"><img src="${URL}assets/frontend/pages/img/brands/gap.jpg" alt="gap" title="gap"></a>
-              <a href="shop-product-list.html"><img src="${URL}assets/frontend/pages/img/brands/next.jpg" alt="next" title="next"></a>
-              <a href="shop-product-list.html"><img src="${URL}assets/frontend/pages/img/brands/puma.jpg" alt="puma" title="puma"></a>
-              <a href="shop-product-list.html"><img src="${URL}assets/frontend/pages/img/brands/zara.jpg" alt="zara" title="zara"></a>
-            </div>
-        </div>
-    </div>
-    <!-- END BRANDS -->
+<div class="colorlib-partner">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-8 offset-sm-2 text-center colorlib-heading colorlib-heading-sm">
+						<h2>Trusted Partners</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col partner-col text-center">
+						<img src="${URL}assets/images/brand-1.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+					</div>
+					<div class="col partner-col text-center">
+						<img src="${URL}assets/images/brand-2.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+					</div>
+					<div class="col partner-col text-center">
+						<img src="${URL}assets/images/brand-3.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+					</div>
+					<div class="col partner-col text-center">
+						<img src="${URL}assets/images/brand-4.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+					</div>
+					<div class="col partner-col text-center">
+						<img src="${URL}assets/images/brand-5.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+					</div>
+				</div>
+			</div>
+		</div>

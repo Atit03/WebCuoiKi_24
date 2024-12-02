@@ -27,8 +27,11 @@
 					<ul>
 						<li class="active"><a
 							href="${pageContext.request.contextPath}/home">Home</a></li>
-						<li><a href="#">Product</a></li>
-
+						<li><a href="${pageContext.request.contextPath}/men">Men</a></li>
+						<li><a href="${pageContext.request.contextPath}/woman">Woman</a></li>
+						<li><a href="${pageContext.request.contextPath}/about">About</a></li>
+						<li><a href="${pageContext.request.contextPath}/contact">Contact</a></li>
+	
 
 						<li class="cart"><a
 							href="${pageContext.request.contextPath}/login">Login</a></li>
