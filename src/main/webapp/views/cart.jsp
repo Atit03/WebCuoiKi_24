@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="/common/taglib.jsp"%>
 <div class="breadcrumbs">
 	<div class="container">
 		<div class="row">
@@ -59,101 +60,40 @@
 						<span>Remove</span>
 					</div>
 				</div>
-				<div class="product-cart d-flex">
-					<div class="one-forth">
-						<div class="product-img"
-							style="background-image: url(images/item-6.jpg);"></div>
-						<div class="display-tc">
-							<h3>Product Name</h3>
+				<c:forEach var="product" items="${cartList}">
+					<div class="product-cart d-flex product-cart-${product.cartitemid}">
+						<div class="one-forth">
+							<div class="product-img"
+								style="background-image: url(${product.image});"></div>
+							<div class="display-tc">
+								<h3>${product.productname}</h3>
+							</div>
+						</div>
+						<div class="one-eight text-center">
+							<div class="display-tc">
+								<span class="price" id="price-${product.cartitemid}">${product.price}</span>
+							</div>
+						</div>
+						<div class="one-eight text-center">
+							<div class="display-tc">
+								<input type="number" id="quantity-${product.cartitemid}"
+									name="quantity" class="form-control input-number text-center"
+									value="${product.quantity}" min="1" max="100"
+									onchange="updateQuantity(${product.cartitemid}, this.value)">
+							</div>
+						</div>
+						<div class="one-eight text-center">
+							<div class="display-tc">
+								<span class="prices" id="total-${product.cartitemid}">${product.price * product.quantity}</span>
+							</div>
+						</div>
+						<div class="one-eight text-center">
+							<div class="display-tc">
+								<a href="#" class="closed" onclick="removeFromCart(${product.cartitemid})"></a>
+							</div>
 						</div>
 					</div>
-					<div class="one-eight text-center">
-						<div class="display-tc">
-							<span class="price">$68.00</span>
-						</div>
-					</div>
-					<div class="one-eight text-center">
-						<div class="display-tc">
-							<input type="text" id="quantity" name="quantity"
-								class="form-control input-number text-center" value="1" min="1"
-								max="100">
-						</div>
-					</div>
-					<div class="one-eight text-center">
-						<div class="display-tc">
-							<span class="price">$120.00</span>
-						</div>
-					</div>
-					<div class="one-eight text-center">
-						<div class="display-tc">
-							<a href="#" class="closed"></a>
-						</div>
-					</div>
-				</div>
-				<div class="product-cart d-flex">
-					<div class="one-forth">
-						<div class="product-img"
-							style="background-image: url(images/item-7.jpg);"></div>
-						<div class="display-tc">
-							<h3>Product Name</h3>
-						</div>
-					</div>
-					<div class="one-eight text-center">
-						<div class="display-tc">
-							<span class="price">$68.00</span>
-						</div>
-					</div>
-					<div class="one-eight text-center">
-						<div class="display-tc">
-							<form action="#">
-								<input type="text" name="quantity"
-									class="form-control input-number text-center" value="1" min="1"
-									max="100">
-							</form>
-						</div>
-					</div>
-					<div class="one-eight text-center">
-						<div class="display-tc">
-							<span class="price">$120.00</span>
-						</div>
-					</div>
-					<div class="one-eight text-center">
-						<div class="display-tc">
-							<a href="#" class="closed"></a>
-						</div>
-					</div>
-				</div>
-				<div class="product-cart d-flex">
-					<div class="one-forth">
-						<div class="product-img"
-							style="background-image: url(images/item-8.jpg);"></div>
-						<div class="display-tc">
-							<h3>Product Name</h3>
-						</div>
-					</div>
-					<div class="one-eight text-center">
-						<div class="display-tc">
-							<span class="price">$68.00</span>
-						</div>
-					</div>
-					<div class="one-eight text-center">
-						<div class="display-tc">
-							<input type="text" id="quantity" name="quantity"
-								class="form-control input-number text-center" value="1" min="1"
-								max="100">
-						</div>
-					</div>
-					<div class="one-eight text-center">
-						<div class="display-tc">
-							<span class="price">$120.00</span>
-						</div>
-					</div>
-					<div class="one-eight text-center">
-						<div class="display-tc">
-							<a href="#" class="closed"></a>
-						</div>
-					</div>
-				</div>
+				</c:forEach>
 			</div>
 		</div>
 		<div class="row row-pb-lg">
@@ -161,12 +101,12 @@
 				<div class="total-wrap">
 					<div class="row">
 						<div class="col-sm-8">
-							<form action="#">
+							<form action="javascript:void(0);" onsubmit="applyCoupon()">
 								<div class="row form-group">
 									<div class="col-sm-9">
-										<input type="text" name="quantity"
+										<input type="number" name="quantity"
 											class="form-control input-number"
-											placeholder="Your Coupon Number...">
+											placeholder="Enter your coupon value..." min="0">
 									</div>
 									<div class="col-sm-3">
 										<input type="submit" value="Apply Coupon"
@@ -175,28 +115,30 @@
 								</div>
 							</form>
 						</div>
+
 						<div class="col-sm-4 text-center">
 							<div class="total">
 								<div class="sub">
 									<p>
-										<span>Subtotal:</span> <span>$200.00</span>
+										<span>Subtotal:</span> <span id="totalCart">$200.00</span>
 									</p>
 									<p>
 										<span>Delivery:</span> <span>$0.00</span>
 									</p>
 									<p>
-										<span>Discount:</span> <span>$45.00</span>
+										<span>Discount:</span> <span id="discountInput">$45.00</span>
 									</p>
 								</div>
 								<div class="grand-total">
 									<p>
-										<span><strong>Total:</strong></span> <span>$450.00</span>
+										<span><strong>Total:</strong></span> <span id="cartTotal">$450.00</span>
 									</p>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+
 			</div>
 		</div>
 

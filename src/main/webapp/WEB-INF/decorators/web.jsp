@@ -227,7 +227,7 @@
 	    const productid = '${product.productid}'; // Chèn productId từ backend
 	    const price = '${product.price}'; // Chèn giá từ backend
 	    const productname = '${product.productname}'; // Chèn tên sản phẩm từ backend
-
+	    const image = '${product.images[0]}';
 	    // Kiểm tra giá trị của các biến có hợp lệ không
 	    if (!quantity || !productid || !price || !productname) {
 	        alert('Missing product information!');
@@ -244,7 +244,8 @@
 	            productid: productid, 
 	            quantity: quantity,
 	            price: price, 
-	            productname: productname
+	            productname: productname,
+	            image:image
 	        })
 	    })
 	    .then(response => response.text()) // Nhận dữ liệu dưới dạng văn bản thay vì JSON để kiểm tra
@@ -256,7 +257,7 @@
 	                alert('Product added to cart!');
 	                // Cập nhật giỏ hàng hoặc giao diện sau khi thêm sản phẩm vào giỏ
 	            } else {
-	                alert('Error adding product to cart!');
+	                alert('Error adding product to cart , Please log in!');
 	            }
 	        } catch (error) {
 	            console.error('Error parsing JSON:', error);
@@ -271,7 +272,109 @@
 
 
 	</script>
+	<script>
+	$(document).ready(function() {
+	    updateCartTotal(); // Gọi hàm tính toán tổng giỏ hàng ngay khi trang được tải
+	    updateFinalTotal();
+	});
 
+	function updateQuantity(cartitemid, newQuantity) {
+	    // Kiểm tra số lượng hợp lệ
+	    if (newQuantity < 1 || newQuantity > 100) {
+	        alert("Số lượng phải nằm trong khoảng 1 đến 100");
+	        return;
+	    }
+
+	    // Lấy giá của sản phẩm
+	    var price = parseFloat($("#price-" + cartitemid).text().replace('$', '').trim()); // Giả sử giá sản phẩm được hiển thị trong một phần tử có id "price-<cartitemid>"
+	    
+	    // Tính lại tổng giá trị sản phẩm
+	    var newTotal = price * newQuantity;
+	    $("#total-" + cartitemid).text(newTotal.toFixed(2)); // Cập nhật tổng tiền của sản phẩm
+
+	    // Gửi yêu cầu AJAX để cập nhật số lượng
+	    $.ajax({
+	        url: "${pageContext.request.contextPath}/updateCartItem", 
+	        type: "POST",
+	        data: { cartitemid: cartitemid, quantity: newQuantity },
+	        success: function(response) {
+	            // Chỉ cần cập nhật lại tổng giỏ hàng và sản phẩm nếu cần
+	            updateCartTotal();  // Cập nhật tổng giỏ hàng sau khi cập nhật số lượng
+	            updateFinalTotal(); // Cập nhật tổng cuối cùng
+	        },
+	        error: function() {
+	            alert("Có lỗi xảy ra khi cập nhật giỏ hàng.");
+	        }
+	    });
+	}
+	function removeFromCart(cartitemid) {
+	    // Hiển thị hộp thoại xác nhận xóa
+	    if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?")) {
+	        // Gửi yêu cầu xóa sản phẩm từ giỏ hàng
+	        $.ajax({
+	            url: "${pageContext.request.contextPath}/removeCartItem", // Địa chỉ URL xóa sản phẩm
+	            type: "POST",
+	            data: { cartitemid: cartitemid }, // Gửi ID của sản phẩm cần xóa
+	            success: function(response) {
+	                // Nếu xóa thành công, cập nhật giao diện
+	                // Xóa sản phẩm khỏi giao diện
+	                $(".product-cart-" + cartitemid).remove(); 
+
+	                // Cập nhật lại tổng giỏ hàng và tổng cuối cùng
+	                updateCartTotal(); 
+	                updateFinalTotal(); 
+
+	                // Hiển thị thông báo thành công
+	                alert("Sản phẩm đã được xóa khỏi giỏ hàng.");
+	            },
+	            error: function() {
+	                // Nếu có lỗi trong quá trình xóa, hiển thị thông báo lỗi
+	                alert("Có lỗi xảy ra khi xóa sản phẩm.");
+	            }
+	        });
+	    }
+	}
+
+
+
+	function updateCartTotal() {
+	    var totalCart = 0;
+
+	    // Lặp qua tất cả các sản phẩm trong giỏ hàng để tính tổng
+	    $(".product-cart").each(function() {
+	        var productTotal = parseFloat($(this).find(".prices").text().replace('$', '').trim()); // Giả sử tổng tiền của mỗi sản phẩm được lưu trong class "prices"
+	        totalCart += productTotal;
+	    });
+
+	    // Cập nhật tổng giỏ hàng
+	    $("#totalCart").text('$' + totalCart.toFixed(2));
+	}
+
+	function updateFinalTotal() {
+	    // Lấy tổng phụ từ phần tử #totalCart và chuyển đổi sang số thực
+	    var subtotal = parseFloat($("#totalCart").text().replace('$', '').trim());
+
+	    // Lấy giá trị giảm giá từ phần tử #discountInput và chuyển đổi sang số thực
+	    var discount = parseFloat($("#discountInput").text().replace('$', '').trim());
+
+	    // Kiểm tra giá trị giảm giá hợp lệ
+	    if (isNaN(discount) || discount < 0) {
+	        discount = 0; // Nếu giá trị giảm giá không hợp lệ, đặt bằng 0
+	    }
+
+	    // Tính tổng cuối cùng sau khi áp dụng giảm giá
+	    var finalTotal = subtotal - discount;
+
+	    // Đảm bảo tổng cuối cùng không nhỏ hơn 0
+	    if (finalTotal < 0) {
+	        finalTotal = 0;
+	    }
+
+	    // Cập nhật giá trị tổng cuối cùng vào #cartTotal
+	    $("#cartTotal").text('$' + finalTotal.toFixed(2));
+	}
+</script>
+	
 
 </body>
 </html>

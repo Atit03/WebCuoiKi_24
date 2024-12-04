@@ -41,6 +41,7 @@ public class CartController extends HttpServlet{
         int quantity = cartRequest.getQuantity();
         BigDecimal price = cartRequest.getPrice(); // Lấy giá từ dữ liệu JSON
         String name = cartRequest.getProductname();  // Lấy tên từ dữ liệu JSON
+        String image = cartRequest.getImage();
      // Lấy session từ request
         HttpSession session = req.getSession(false); // false để không tạo mới session nếu chưa có
 
@@ -53,7 +54,7 @@ public class CartController extends HttpServlet{
 
 
         // Thêm sản phẩm vào giỏ hàng (hoặc tạo mới giỏ nếu chưa có)
-        boolean success = cartDao.addToCart(userId, productId, quantity, name,price);
+        boolean success = cartDao.addToCart(userId, productId, quantity, name,price,image);
         // Cấu hình phản hồi
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");

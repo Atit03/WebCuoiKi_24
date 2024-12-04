@@ -10,16 +10,14 @@
 					</div>
 				</div>
 				<div class="col-sm-5 col-md-3">
-					<form action="#" class="search-wrap">
-						<div class="form-group">
-							<input type="search" class="form-control search"
-								placeholder="Search">
-							<button class="btn btn-primary submit-search text-center"
-								type="submit">
-								<i class="icon-search"></i>
-							</button>
-						</div>
-					</form>
+					<form action="${pageContext.request.contextPath}/search" method="post" class="search-wrap">
+							<div class="form-group">
+								<input name="keyword" type="search" class="form-control search" placeholder="Search">
+								<button class="btn btn-primary submit-search text-center" type="submit">
+									<span class="material-symbols-outlined" style="margin-top: 6px;"> search</span>
+								</button>
+							</div>
+						</form>
 				</div>
 			</div>
 			<div class="row">
@@ -28,7 +26,7 @@
 						<li class="active"><a
 							href="${pageContext.request.contextPath}/home">Home</a></li>
 						<li><a href="${pageContext.request.contextPath}/men">Men</a></li>
-						<li><a href="${pageContext.request.contextPath}/woman">Woman</a></li>
+						<li><a href="${pageContext.request.contextPath}/women">Women</a></li>
 						<li><a href="${pageContext.request.contextPath}/about">About</a></li>
 						<li><a href="${pageContext.request.contextPath}/contact">Contact</a></li>
 
@@ -37,8 +35,8 @@
 							href="${pageContext.request.contextPath}/logout">Logout</a></li>
 						<li class="cart">|</li>
 						<li class="cart"><a href="#">${account.username}</a></li>
-						<li class="cart"><a href="#"><i
-								class="icon-shopping-cart"></i> Cart [0]</a></li>
+						<li class="cart"><a href="${pageContext.request.contextPath}/cartlist?uid=${account.userid}"><i
+								class="icon-shopping-cart"></i> Cart </a></li>
 					</ul>
 				</div>
 			</div>
