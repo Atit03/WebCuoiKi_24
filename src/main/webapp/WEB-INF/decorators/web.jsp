@@ -374,7 +374,30 @@
 	    $("#cartTotal").text('$' + finalTotal.toFixed(2));
 	}
 </script>
-	
+<script>
+document.getElementById("submitOrder").addEventListener("click", function(event) {
+    // Lấy giá trị của địa chỉ đã chọn
+    var selectedAddressId = document.querySelector('input[name="address"]:checked') ? document.querySelector('input[name="address"]:checked').value : null;
+    
+    // Lấy giá trị của phương thức thanh toán đã chọn (COD)
+    var selectedPaymentMethod = document.querySelector('input[name="optradio"]:checked') ? document.querySelector('input[name="optradio"]:checked').value : null;
+    
+    // Lấy giá trị tổng tiền (ví dụ từ phần tử có id "cartTotal")
+    var totalAmount = document.getElementById("cartTotal").innerText.replace('$', '').trim(); // Loại bỏ ký tự $ nếu có
+    console.log("Total Amount: ", totalAmount);
+    // Cập nhật vào các trường ẩn trong form
+    document.getElementById("addressid").value = selectedAddressId;
+    document.getElementById("paymentmethod").value = selectedPaymentMethod;
+    document.getElementById("total").value = totalAmount;
+
+    // Nếu không có địa chỉ hoặc phương thức thanh toán được chọn, bạn có thể thêm logic để thông báo lỗi hoặc ngừng gửi form
+    if (!selectedAddressId || !selectedPaymentMethod) {
+        alert("Please select both address and payment method.");
+        event.preventDefault();  // Ngừng gửi form nếu chưa chọn đầy đủ thông tin
+    }
+});
+
+    </script>
 
 </body>
 </html>
