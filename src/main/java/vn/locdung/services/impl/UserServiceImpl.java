@@ -8,10 +8,10 @@ import vn.locdung.models.UserModel;
 import vn.locdung.services.IUserService;
 
 public class UserServiceImpl implements IUserService{
-	IUserDao useDao = new UserDaoImpl();
+	IUserDao userDao = new UserDaoImpl();
 	@Override
 	public List<UserModel> findAll() {
-		return useDao.findAll();
+		return userDao.findAll();
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class UserServiceImpl implements IUserService{
 
 	@Override
 	public UserModel findByEmail(String email) {
-		return useDao.findByEmail(email);
+		return userDao.findByEmail(email);
 	}
 
 	@Override
@@ -42,17 +42,44 @@ public class UserServiceImpl implements IUserService{
 
 	@Override
 	public List<UserModel> findUser(int page, int limit) {
-		return useDao.findUser(page,limit);
+		return userDao.findUser(page,limit);
 	}
 
 	@Override
 	public int countUser() {
-		return useDao.countUser();
+		return userDao.countUser();
 	}
 
 	@Override
 	public void delete(int id) {
-		useDao.delete(id);
+		userDao.delete(id);
+	}
+//register
+	@Override
+	public boolean register(String email, String password, String username, String fullname, String code) {
+		if (userDao.checkExistEmail(email)) {
+		    return false;
+		}
+		if (userDao.checkExistUsername(username)) {
+		    return false;
+		}
+		userDao.insertregister(new UserModel(username, email, fullname, password, 0, 2, code));
+		return true;
 	}
 
+	@Override
+	public void updatestatus(UserModel user) {
+		userDao.updatestatus(user);
+	}
+
+	@Override
+	public boolean checkExistEmail(String email) {
+		return userDao.checkExistEmail(email);
+	}
+
+	@Override
+	public boolean checkExistUsername(String username) {
+		return userDao.checkExistUsername(username);
+	}
+//register
 }

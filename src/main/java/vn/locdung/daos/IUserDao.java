@@ -14,4 +14,10 @@ public interface IUserDao {
 	void insert(UserModel user);
 	void delete(int id);
 	UserModel findByEmail(String email);
+	//Register
+	void insertregister(UserModel user);
+	boolean checkExistEmail(String email);
+	boolean checkExistUsername(String username);
+	void updatestatus(UserModel user);
+	//Register
 }
