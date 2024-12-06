@@ -398,7 +398,14 @@ document.getElementById("submitOrder").addEventListener("click", function(event)
 });
 
     </script>
-
+	<script>
+    function confirmOrder() {
+        // Hiển thị hộp thoại xác nhận
+        const confirmMessage = "Are you sure you want to place this order?";
+        return confirm(confirmMessage); // Trả về true nếu người dùng nhấn OK, false nếu nhấn Cancel
+    }
+</script>
+	
 </body>
 </html>
 
