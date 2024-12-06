@@ -38,6 +38,7 @@
 										shopping_cart
 									</span> Cart </a>
 							</li>
+							
 						</ul>
 					</div>
 				</div>

@@ -12,14 +12,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import vn.locdung.daos.impl.CartDaoImpl;
-import vn.locdung.daos.impl.OderDaoImpl;
+import vn.locdung.daos.impl.OrderDaoImpl;
 import vn.locdung.models.CartItemModel;
 import vn.locdung.models.UserModel;
 @WebServlet("/oder")
 public class OderController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	CartDaoImpl cartDao = new CartDaoImpl();
-	OderDaoImpl oderDao =  new OderDaoImpl();
+	OrderDaoImpl oderDao =  new OrderDaoImpl();
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String addressId = req.getParameter("addressid");
