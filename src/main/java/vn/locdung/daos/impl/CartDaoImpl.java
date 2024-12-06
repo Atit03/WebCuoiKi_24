@@ -187,4 +187,13 @@ public class CartDaoImpl {
             e.printStackTrace();
         }
 	}
+	public void clearCart(int userId) throws SQLException {
+	    String sql = "DELETE FROM cartitems WHERE cartid IN (SELECT cartid FROM cart WHERE Userid = ?)";
+	    try (Connection conn = new DBConnectMySQL().getDatabaseConnection();
+	         PreparedStatement statement = conn.prepareStatement(sql)) {
+	        statement.setInt(1, userId);
+	        statement.executeUpdate();
+	    }
+	}
+
 }

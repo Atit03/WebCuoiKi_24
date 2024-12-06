@@ -172,16 +172,15 @@
 							</div>
 							<div class="row">
 								<div class="col-md-12 text-center">
-									<p>
-										<a href="#" class="btn btn-primary">Place an order</a>
-									</p>
+									
 									<form action="${pageContext.request.contextPath}/oder" method="POST">
 										<!-- Các trường input ẩn để gửi thông tin -->
 										<input type="hidden" name="addressid" id="addressid">
 										<input type="hidden" name="total" id="total"> <input
 											type="hidden" name="paymentmethod" id="paymentmethod">
+										<input type="hidden" name="fullname" id="fullname">
 										<!-- Nút để đặt hàng -->
-										<button type="submit" class="btn btn-primary" id="submitOrder">Place
+										<button type="submit" class="btn btn-primary" id="submitOrder" onclick="return confirmOrder()">Place
 											an order</button>
 									</form>
 								</div>

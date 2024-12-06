@@ -27,7 +27,6 @@ public class CartlistController extends HttpServlet{
 		List<AddressModel> addressList = addDao.findByUser(userid);
 		req.setAttribute("cartList", cartList);
 		req.setAttribute("addressList", addressList);
-		System.out.println(addressList);
 //		System.out.println(cartList);
 		req.getRequestDispatcher("/views/cart.jsp").forward(req, resp);
 	}

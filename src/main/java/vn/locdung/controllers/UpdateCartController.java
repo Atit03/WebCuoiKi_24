@@ -18,10 +18,7 @@ public class UpdateCartController extends HttpServlet{
             int cartitemid = Integer.parseInt(req.getParameter("cartitemid"));
             int quantity = Integer.parseInt(req.getParameter("quantity"));
 
-            // Cập nhật số lượng trong cơ sở dữ liệu
             cartDao.updateCartItemQuantity(cartitemid, quantity);
-
-            // Trả về kết quả
             resp.getWriter().write("Success");
         } catch (NumberFormatException e) {
             resp.getWriter().write("Invalid input");
