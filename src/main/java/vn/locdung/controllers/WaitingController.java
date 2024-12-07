@@ -23,12 +23,12 @@ public class WaitingController extends HttpServlet {
 		UserModel u=(UserModel) session.getAttribute("account");
 		if(u.getRoleid()==1) {
 		resp.sendRedirect(req.getContextPath()+"/home");
-		}else if(u.getRoleid()==2) {
+		}else if(u.getRoleid()==3) {
 			IShopService shopService = new ShopServiceImpl();
 			int checkShop = shopService.checkShop(u.getUserid());
 			session.setAttribute("checkShop", checkShop);
 			resp.sendRedirect(req.getContextPath()+"/home");
-		}else if(u.getRoleid()==3) {
+		}else if(u.getRoleid()==2) {
 			resp.sendRedirect(req.getContextPath()+"/home");
 		}else {
 			resp.sendRedirect(req.getContextPath()+"/login");
