@@ -21,11 +21,7 @@
 				<div class="product-desc">
 					<h3>${product.productname}</h3>
 					<p class="price">
-						<span>${product.price}</span> <span class="rate"> <i
-							class="icon-star-full"></i> <i class="icon-star-full"></i> <i
-							class="icon-star-full"></i> <i class="icon-star-full"></i> <i
-							class="icon-star-half"></i> (74 Rating)
-						</span>
+						
 					</p>
 					<p>${product.description}</p>
 					<div class="input-group mb-4">

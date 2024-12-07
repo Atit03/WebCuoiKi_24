@@ -35,8 +35,7 @@
 							href="${pageContext.request.contextPath}/logout">Logout</a></li>
 						<li class="cart">|</li>
 						<li class="cart"><a href="#">${account.username}</a></li>
-						<li class="cart"><a href="${pageContext.request.contextPath}/cartlist?uid=${account.userid}"><i
-								class="icon-shopping-cart"></i> Cart </a></li>
+						<li class="cart"><a href="${pageContext.request.contextPath}/cartlist?uid=${account.userid}"> Cart </a></li>
 						<li class="cart"><a href="${pageContext.request.contextPath}/orderlist">Order</a></li>
 					</ul>
 				</div>

@@ -24,7 +24,7 @@
 					</div>
 					<div class="col-sm-6 text-center">
 						<div class="featured">
-							<a href="${pageContext.request.contextPath}/woman" class="featured-img" style="background-image: url(${URL}assets/images/women.jpg);"></a>
+							<a href="${pageContext.request.contextPath}/women" class="featured-img" style="background-image: url(${URL}assets/images/women.jpg);"></a>
 							<div class="desc">
 								<h2><a href="${pageContext.request.contextPath}/woman">Shop Women's Collection</a></h2>
 							</div>
@@ -64,12 +64,6 @@
 				</c:if>
 			</c:forEach>
 		</div>
-		<div class="row">
-			<div class="col-md-12 text-center">
-				<p>
-					<a href="#" class="btn btn-primary btn-lg">Shop All Products</a>
-				</p>
-			</div>
-		</div>
+	
 	</div>
 </div>

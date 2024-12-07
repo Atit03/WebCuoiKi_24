@@ -30,14 +30,6 @@
 
 
 							<li class="cart"><a href="${pageContext.request.contextPath}/login">Login</a></li>
-
-							<li class="cart">
-								<a href="${pageContext.request.contextPath}/cart"><span
-										class="material-symbols-outlined"
-										style="font-size: 16px;vertical-align: middle; line-height: 1; margin-top: -5px;">
-										shopping_cart
-									</span> Cart </a>
-							</li>
 							
 						</ul>
 					</div>
