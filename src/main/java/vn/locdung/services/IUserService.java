@@ -6,7 +6,7 @@ import java.util.List;
 import vn.locdung.models.UserModel;
 
 public interface IUserService {
-	UserModel login(String username,String password);
+	
 	List<UserModel> findAll();
 	List<UserModel> findUser(int page, int limit);
 	int countUser();
@@ -15,4 +15,14 @@ public interface IUserService {
 	void insert(UserModel user);
 	void delete(int id);
 	UserModel findByEmail(String email);
+	
+	//register
+	boolean register(String email,String password,String username,String fullname,String code);
+	void updatestatus(UserModel user);
+	boolean checkExistEmail(String email);
+	boolean checkExistUsername(String username);
+	//register
+	
+	//login
+	UserModel login(String username, String password);
 }

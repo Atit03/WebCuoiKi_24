@@ -33,7 +33,6 @@ public class LoginControllers extends HttpServlet {
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
 		String remember = req.getParameter("remember");
-
 		boolean isRememberMe = false;
 		if ("on".equals(remember)) {
 			isRememberMe = true;
@@ -43,23 +42,29 @@ public class LoginControllers extends HttpServlet {
 
 		// Kiểm tra trường email
 		if (email.isEmpty()) {
-		    alertMsg = "Email không được rỗng";
-		    req.setAttribute("alert", alertMsg);
-		    req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
-		    return;
+			alertMsg = "Email không được rỗng";
+			req.setAttribute("alert", alertMsg);
+			req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
+			return;
 		}
 
 		// Kiểm tra trường password
 		if (password.isEmpty()) {
-		    alertMsg = "Mật khẩu không được rỗng";
-		    req.setAttribute("alert", alertMsg);
-		    req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
-		    return;
+			alertMsg = "Mật khẩu không được rỗng";
+			req.setAttribute("alert", alertMsg);
+			req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
+			return;
 		}
 
 		UserModel user = service.login(email, password);
-		if (user != null) 
-		{
+		if (user != null) {
+			if (user.getStatus() == 0) {
+				alertMsg = "Tài khoản chưa được kích hoạt";
+				req.setAttribute("alert", alertMsg);
+				req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
+				return;
+			}
+
 			HttpSession session = req.getSession(true);
 			session.setAttribute("account", user);
 			if (isRememberMe) {
@@ -67,9 +72,8 @@ public class LoginControllers extends HttpServlet {
 			}
 			resp.sendRedirect(req.getContextPath() + "/waiting");
 
-		} 
-		else{
-			alertMsg = "Tài khoản hoặc mật khẩu không đúng";
+		} else {
+			alertMsg = "Email hoặc mật khẩu không đúng";
 			req.setAttribute("alert", alertMsg);
 			req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
 		}

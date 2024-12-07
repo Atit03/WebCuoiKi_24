@@ -9,34 +9,41 @@ public class UserModel implements Serializable{
 	private String username;
 	private String password;
 	private String email;
+	private String fullname;
 	private String phone;
+	private int status;
+	private String code;
 	private int roleid;
-	private String rolename;
-	private boolean isactive;
 	public UserModel() {
 		super();
 	}
-	public UserModel(int userid, String username, String password, String email, String phone, int roleid,
-			boolean isactive) {
+	
+	
+	
+	public UserModel(String username, String email, String fullname, String password, int status, int roleid,
+			String code) {
 		super();
-		this.userid = userid;
 		this.username = username;
 		this.password = password;
 		this.email = email;
-		this.phone = phone;
+		this.fullname = fullname;
+		this.status = status;
+		this.code = code;
 		this.roleid = roleid;
-		this.isactive = isactive;
 	}
+
 	
-	public UserModel(int userid, String username, String email, String phone, int roleid, String rolename) {
+
+	public UserModel(String username, String email, String fullname, String code) {
 		super();
-		this.userid = userid;
 		this.username = username;
 		this.email = email;
-		this.phone = phone;
-		this.roleid = roleid;
-		this.rolename = rolename;
+		this.fullname = fullname;
+		this.code = code;
 	}
+
+
+
 	public int getUserid() {
 		return userid;
 	}
@@ -61,11 +68,29 @@ public class UserModel implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public String getFullname() {
+		return fullname;
+	}
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
 	public String getPhone() {
 		return phone;
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
 	}
 	public int getRoleid() {
 		return roleid;
@@ -73,23 +98,7 @@ public class UserModel implements Serializable{
 	public void setRoleid(int roleid) {
 		this.roleid = roleid;
 	}
-	public boolean isIsactive() {
-		return isactive;
-	}
-	public void setIsactive(boolean isactive) {
-		this.isactive = isactive;
-	}
-	public String getRolename() {
-		return rolename;
-	}
-	public void setRolename(String rolename) {
-		this.rolename = rolename;
-	}
-	@Override
-	public String toString() {
-		return "UserModel [userid=" + userid + ", username=" + username + ", password=" + password + ", email=" + email
-				+ ", phone=" + phone + ", roleid=" + roleid + ", rolename=" + rolename + ", isactive=" + isactive + "]";
-	}
+	
 	
 	
 

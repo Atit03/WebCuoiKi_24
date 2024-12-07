@@ -33,7 +33,6 @@ public class UserDaoImpl implements IUserDao{
 	                user.setEmail(rs.getString("Email"));
 	                user.setPhone(rs.getString("Phone"));
 	                user.setRoleid(rs.getInt("Roleid"));
-	                user.setIsactive(rs.getBoolean("Isactive"));
 
 	                // Thêm người dùng vào danh sách
 	                list.add(user);
@@ -72,13 +71,13 @@ public class UserDaoImpl implements IUserDao{
 	        try (ResultSet rs = ps.executeQuery()) {
 	            if (rs.next()) {
 	                user = new UserModel();
-	                user.setUserid(rs.getInt("Userid"));
-	                user.setUsername(rs.getString("Username"));
-	                user.setPassword(rs.getString("Password"));
-	                user.setEmail(rs.getString("Email"));
-	                user.setPhone(rs.getString("Phone"));
-	                user.setRoleid(rs.getInt("Roleid"));
-	                user.setIsactive(rs.getBoolean("Isactive"));
+	                user.setUserid(rs.getInt("userid"));
+	                user.setUsername(rs.getString("username"));
+	                user.setPassword(rs.getString("password"));
+	                user.setEmail(rs.getString("email"));
+	                user.setFullname(rs.getString("fullname"));
+	                user.setRoleid(rs.getInt("roleId"));
+	                user.setStatus(rs.getInt("status"));
 	            }
 	        }
 
@@ -126,7 +125,6 @@ public class UserDaoImpl implements IUserDao{
 	                user.setEmail(rs.getString("Email"));
 	                user.setPhone(rs.getString("Phone"));
 	                user.setRoleid(rs.getInt("Roleid"));
-	                user.setRolename(rs.getString("Rolename"));
 
 	                list.add(user); // Thêm vào danh sách
 	            }
@@ -156,7 +154,7 @@ public class UserDaoImpl implements IUserDao{
         }
         return count;
 	}
-
+//register
 	@Override
 	public void delete(int id) {
 		String sql = "DELETE FROM users WHERE Userid = ?";
@@ -172,4 +170,84 @@ public class UserDaoImpl implements IUserDao{
         }
 	}
 
+	@Override
+	public void insertregister(UserModel user) {
+		String sql = "Insert INTO users (email, username, fullname, password, status, roleId, code) Values (?,?,?,?,?,?,?)";
+		try {
+			conn = new DBConnectMySQL().getDatabaseConnection();
+
+		    ps = conn.prepareStatement(sql);
+		    ps.setString(1, user.getEmail());
+		    ps.setString(2, user.getUsername());
+		    ps.setString(3, user.getFullname());
+		    ps.setString(4, user.getPassword());
+		    ps.setInt(5, user.getStatus());
+		    ps.setInt(6, user.getRoleid());
+		    ps.setString(7, user.getCode());
+		    ps.executeUpdate();
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
+	}
+
+	@Override
+	public boolean checkExistEmail(String email) {
+		boolean duplicate = false;
+		String sql = "Select * From Users where email = ?";
+		try {
+			conn = new DBConnectMySQL().getDatabaseConnection();
+		    ps = conn.prepareStatement(sql);
+		    ps.setString(1, email);
+		    rs=ps.executeQuery();
+		    if(rs.next()) {
+		        duplicate =true;
+		    }
+		    ps.close();
+		    conn.close();
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
+		return duplicate;
+	}
+
+	@Override
+	public boolean checkExistUsername(String username) {
+		boolean duplicate = false;
+		String sql = "Select * From Users where username = ?";
+		try {
+			conn = new DBConnectMySQL().getDatabaseConnection();
+		    ps = conn.prepareStatement(sql);
+		    ps.setString(1, username);
+		    rs=ps.executeQuery();
+		    if(rs.next()) {
+		        duplicate =true;
+		    }
+		    ps.close();
+		    conn.close();
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
+		return duplicate;
+	}
+
+	@Override
+	public void updatestatus(UserModel user) {
+		String sql = "UPDATE Users SET status=?, code=? WHERE email=?";
+		try {
+			conn = new DBConnectMySQL().getDatabaseConnection();
+		    ps = conn.prepareStatement(sql);
+
+		    ps.setInt(1, user.getStatus());
+		    ps.setString(2, user.getCode());
+		    ps.setString(3, user.getEmail());
+		    ps.executeUpdate();
+
+		} catch (Exception e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}
+
+		
+	}
+//register
 }
