@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class DBConnectMySQL {
 	private final String USERNAME = "root";
-	private final String PASSWORD = "locthuong123";// thay đổi pass
+	private final String PASSWORD = "170604";// thay đổi pass
 	private final String DRIVER = "com.mysql.cj.jdbc.Driver";
-	private final String URL = "jdbc:mysql://localhost:3306/uteshop6";// thay đổi tên database
+	private final String URL = "jdbc:mysql://localhost:3306/uteshop";// thay đổi tên database
 
 	public Connection getDatabaseConnection() throws SQLException{
 		try {
