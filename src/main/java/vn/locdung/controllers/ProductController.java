@@ -22,6 +22,7 @@ public class ProductController extends HttpServlet{
 		{
 			int productId = Integer.parseInt(req.getParameter("id"));
             ProductModel product = productService.findById(productId);
+            System.out.println(product);
             if (product != null) {
                 req.setAttribute("product", product);
                 req.getRequestDispatcher("/views/detail.jsp").forward(req, resp);

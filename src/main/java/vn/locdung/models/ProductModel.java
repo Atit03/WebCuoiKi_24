@@ -59,13 +59,12 @@ public class ProductModel implements Serializable{
 	}
 	
 	public ProductModel(int productid, String productname, String description, BigDecimal price,
-			int ratingcount, String image, List<String> images) {
+			 String image, List<String> images) {
 		super();
 		this.productid = productid;
 		this.productname = productname;
 		this.description = description;
 		this.price = price;
-		this.ratingcount = ratingcount;
 		this.image = image;
 		this.images = images;
 	}
