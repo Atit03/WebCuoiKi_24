@@ -37,4 +37,14 @@
     <servlet-name>ForgotPasswordController</servlet-name>
     <url-pattern>/ForgotPasswordController</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ProductsController</display-name>
+    <servlet-name>ProductsController</servlet-name>
+    <servlet-class>vn.locdung.controllers.admin.ProductsController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductsController</servlet-name>
+    <url-pattern>/ProductsController</url-pattern>
+  </servlet-mapping>
 </web-app>

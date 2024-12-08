@@ -25,4 +25,7 @@ public interface IProductService {
 	
 	List<ProductModel> getProductsBestSellerM();
 	List<ProductModel> getProductsBestSellerW();
+	
+	List<ProductModel> findAllProducts();
+	boolean deleteProductById(int productId);
 }

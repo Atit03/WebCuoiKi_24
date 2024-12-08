@@ -33,6 +33,10 @@ public class ProductDaoImpl implements IProductDao {
 				product.setPrice(rs.getBigDecimal("Price"));
 				product.setImage(rs.getString("Imageurl"));
 
+				
+				product.setStock(rs.getInt("Stock"));
+	            product.setRating(rs.getBigDecimal("Rating"));
+	            product.setCategoryid(rs.getInt("Categoryid"));
 				// Thêm người dùng vào danh sách
 				list.add(product);
 			}
@@ -476,6 +480,60 @@ public class ProductDaoImpl implements IProductDao {
 		}
 
 		return list;
+	}
+
+	@Override
+	public List<ProductModel> findAllProducts() {
+		String sql = """
+		        SELECT p.Productid, p.Productname, p.Price, p.Stock, p.Rating, 
+		               pi.Imageurl AS image, p.Categoryid
+		        FROM products p
+		        LEFT JOIN productimages pi ON p.Productid = pi.Productid AND pi.Isprimary = TRUE
+		        ORDER BY p.Sold DESC
+		        LIMIT 12;
+		    """;
+
+		    List<ProductModel> list = new ArrayList<>();
+
+		    try (Connection conn = new DBConnectMySQL().getDatabaseConnection();
+		         PreparedStatement ps = conn.prepareStatement(sql);
+		         ResultSet rs = ps.executeQuery()) {
+
+		        while (rs.next()) {
+		            ProductModel product = new ProductModel();
+		            product.setProductid(rs.getInt("Productid"));
+		            product.setProductname(rs.getString("Productname"));
+		            product.setPrice(rs.getBigDecimal("Price"));
+		            product.setStock(rs.getInt("Stock"));
+		            product.setRating(rs.getBigDecimal("Rating"));
+		            product.setCategoryid(rs.getInt("Categoryid"));
+		            product.setImage(rs.getString("image"));
+
+		            // Thêm sản phẩm vào danh sách
+		            list.add(product);
+		        }
+
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+
+		    return list;
+	}
+
+	@Override
+	public boolean deleteProductById(int productId) {
+		String DELETE_PRODUCT_SQL = "DELETE FROM products WHERE Productid = ?";
+		try (Connection conn = new DBConnectMySQL().getDatabaseConnection();
+	             PreparedStatement ps = conn.prepareStatement(DELETE_PRODUCT_SQL)) {
+	            ps.setInt(1, productId);
+	            int rowsAffected = ps.executeUpdate();
+	            return rowsAffected > 0;
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        return false;
 	}
 
 

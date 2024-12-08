@@ -65,5 +65,11 @@ public class ProductServiceImpl implements IProductService{
 	public List<ProductModel> getProductsBestSellerW() {
 		return productDao.getProductsBestSellerW();
 	}
+	public List<ProductModel> findAllProducts() {
+		return productDao.findAllProducts();
+	}
+	public boolean deleteProductById(int productId) {
+		return productDao.deleteProductById(productId);
+	}
 
 }

@@ -27,4 +27,6 @@ public interface IProductDao {
 	List<ProductModel> getProductsBestSellerW();
 	
 	List<ProductModel> search(String keyword);
+	List<ProductModel> findAllProducts();
+	boolean deleteProductById(int productId);
 }
