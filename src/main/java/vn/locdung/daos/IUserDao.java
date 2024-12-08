@@ -20,4 +20,7 @@ public interface IUserDao {
 	boolean checkExistUsername(String username);
 	void updatestatus(UserModel user);
 	//Register
+	boolean updateUser(UserModel user);
+	boolean deleteUserById(int userId);
+	boolean addUser(UserModel user);
 }

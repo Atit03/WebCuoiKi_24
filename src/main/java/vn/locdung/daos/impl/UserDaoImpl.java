@@ -17,41 +17,79 @@ public class UserDaoImpl implements IUserDao{
 	public ResultSet rs = null;
 
 	@Override
-	public List<UserModel> findAll(){
-		 String sql = "SELECT * FROM users";
-	        List<UserModel> list = new ArrayList<>();
+	public List<UserModel> findAll() {
+	    String sql = "SELECT userid, username, email, fullname, phone FROM users"; // Chỉ lấy các trường cần hiển thị
+	    List<UserModel> list = new ArrayList<>();
 
-	        try (Connection conn = new DBConnectMySQL().getDatabaseConnection();
-	             PreparedStatement ps = conn.prepareStatement(sql);
-	             ResultSet rs = ps.executeQuery()) {
+	    try (Connection conn = new DBConnectMySQL().getDatabaseConnection();
+	         PreparedStatement ps = conn.prepareStatement(sql);
+	         ResultSet rs = ps.executeQuery()) {
 
-	            while (rs.next()) {
-	                UserModel user = new UserModel();
-	                user.setUserid(rs.getInt("Userid"));
-	                user.setUsername(rs.getString("Username"));
-	                user.setPassword(rs.getString("Password"));
-	                user.setEmail(rs.getString("Email"));
-	                user.setPhone(rs.getString("Phone"));
-	                user.setRoleid(rs.getInt("Roleid"));
+	        while (rs.next()) {
+	            UserModel user = new UserModel();
+	            user.setUserid(rs.getInt("userid"));          // ID người dùng
+	            user.setUsername(rs.getString("username"));  // Tên đăng nhập
+	            user.setEmail(rs.getString("email"));        // Email
+	            user.setFullname(rs.getString("fullname"));  // Họ và tên
+	            user.setPhone(rs.getString("phone"));        // Số điện thoại
 
-	                // Thêm người dùng vào danh sách
-	                list.add(user);
-	            }
-
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        } catch (Exception e) {
-	            e.printStackTrace();
+	            // Thêm người dùng vào danh sách
+	            list.add(user);
 	        }
 
-	        return list;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return list;
+	}
+	public boolean updateUser(UserModel user) {
+		String sql = "UPDATE users SET username = ?, email = ?, phone = ?, fullname = ? WHERE userid = ?";
+	    try (Connection conn = new DBConnectMySQL().getDatabaseConnection();
+	         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+	        ps.setString(1, user.getUsername());
+	        ps.setString(2, user.getEmail());
+	        ps.setString(3, user.getPhone());
+	        ps.setString(4, user.getFullname());
+	        ps.setInt(5, user.getUserid());
+
+	        return ps.executeUpdate() > 0;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return false;
 	}
 
 	@Override
 	public UserModel findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	    String sql = "SELECT * FROM users WHERE userid = ?";
+	    try (Connection conn = new DBConnectMySQL().getDatabaseConnection();
+	         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+	        ps.setInt(1, id);
+
+	        try (ResultSet rs = ps.executeQuery()) {
+	            if (rs.next()) {
+	                UserModel user = new UserModel();
+	                user.setUserid(rs.getInt("userid"));
+	                user.setUsername(rs.getString("username"));
+	                user.setPassword(rs.getString("password")); // Nếu cần mật khẩu, thêm trường này
+	                user.setEmail(rs.getString("email"));
+	                user.setPhone(rs.getString("phone"));
+	                user.setFullname(rs.getString("fullname"));
+	                user.setRoleid(rs.getInt("roleid")); // Nếu bạn có trường `roleid`
+	                return user;
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return null; // Trả về null nếu không tìm thấy người dùng
 	}
+
 
 	@Override
 	public void insert(UserModel user) {
@@ -250,4 +288,40 @@ public class UserDaoImpl implements IUserDao{
 		
 	}
 //register
+	@Override
+	public boolean deleteUserById(int userId) {
+		String sql = "DELETE FROM users WHERE userid = ?";
+	    try (Connection conn = new DBConnectMySQL().getDatabaseConnection();
+	         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+	        ps.setInt(1, userId);
+	        int affectedRows = ps.executeUpdate();
+	        return affectedRows > 0; // Trả về true nếu xóa thành công
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return false; // Trả về false nếu xảy ra lỗi
+	}
+	@Override
+	public boolean addUser(UserModel user) {
+		String sql = "INSERT INTO users (username, fullname, email, phone, password, roleid) VALUES (?, ?, ?, ?, ?, ?)";
+	    try (Connection conn = new DBConnectMySQL().getDatabaseConnection();
+	         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+	        ps.setString(1, user.getUsername());
+	        ps.setString(2, user.getFullname());
+	        ps.setString(3, user.getEmail());
+	        ps.setString(4, user.getPhone());
+	        ps.setString(5, user.getPassword()); // Mã hóa nếu cần
+	        ps.setInt(6, user.getRoleid());
+
+	        int affectedRows = ps.executeUpdate();
+	        return affectedRows > 0; // Trả về true nếu thêm thành công
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return false; // Trả về false nếu có lỗi
+	}
 }

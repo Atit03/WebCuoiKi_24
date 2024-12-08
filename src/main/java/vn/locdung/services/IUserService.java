@@ -15,6 +15,9 @@ public interface IUserService {
 	void insert(UserModel user);
 	void delete(int id);
 	UserModel findByEmail(String email);
+	boolean updateUser(UserModel user);
+	boolean deleteUserById(int userId);
+	boolean addUser(UserModel user);
 	
 	//register
 	boolean register(String email,String password,String username,String fullname,String code);

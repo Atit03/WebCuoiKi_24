@@ -28,10 +28,7 @@
 						<li class="active"><a
 							href="${pageContext.request.contextPath}/home">Home</a></li>
 						<li><a href="${pageContext.request.contextPath}/admin/user">Quản lý User</a></li>
-						<li><a href="#">Quản lý Shop</a></li>
-						<li><a href="#">Quản lý khuyến mãi</a></li>
-						<li><a href="#">Quản lý doanh mục</a></li>
-
+						<li><a href="${pageContext.request.contextPath}/admin/product">Quản lý sản phẩm</a></li>
 						<li class="cart"><a
 							href="${pageContext.request.contextPath}/logout">Logout</a></li>
 						<li class="cart">|</li>

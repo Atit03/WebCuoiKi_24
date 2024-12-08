@@ -13,11 +13,14 @@ public class UserServiceImpl implements IUserService{
 	public List<UserModel> findAll() {
 		return userDao.findAll();
 	}
+	
+	public boolean updateUser(UserModel user) {
+		return userDao.updateUser(user);
+	}
 
 	@Override
 	public UserModel findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return userDao.findById(id);
 	}
 
 	@Override
@@ -82,4 +85,14 @@ public class UserServiceImpl implements IUserService{
 		return userDao.checkExistUsername(username);
 	}
 //register
+
+	@Override
+	public boolean deleteUserById(int userId) {
+		return userDao.deleteUserById(userId);
+	}
+
+	public boolean addUser(UserModel user) {
+		
+		return userDao.addUser(user);
+	}
 }
