@@ -1,9 +1,12 @@
 Nhóm 2: Website bán giày UteSneakers
+----------------------------------
 
 21110897 - Nguyễn Thành Lộc
+----------------------------------
 22110302 - Nguyễn Tiến Dũng
 
 Phân công công việc
+----------------------------------
 Lộc: 
   - Đăng nhập
   - Đăng ký (xác nhận otp qua mail)
