@@ -48,11 +48,12 @@ public class ProductDaoImpl implements IProductDao {
 
 	@Override
 	public ProductModel findById(int id) {
-		String sql = "SELECT \r\n" + "            p.Productid, p.Productname, p.Price, p.Description, \r\n"
-				+ "            pi.Imageurl, pi.Isprimary, \r\n"
-				+ "            (SELECT COUNT(*) FROM Reviews r WHERE r.Productid = p.Productid) AS Ratingcount\r\n"
-				+ "        FROM Products p\r\n" + "        JOIN ProductImages pi ON p.Productid = pi.Productid\r\n"
-				+ "        WHERE p.Productid = ?";
+		String sql = "SELECT \r\n"
+				+ "    p.Productid, p.Productname, p.Price, p.Description, \r\n"
+				+ "    pi.Imageurl, pi.Isprimary\r\n"
+				+ "FROM Products p\r\n"
+				+ "JOIN ProductImages pi ON p.Productid = pi.Productid\r\n"
+				+ "WHERE p.Productid = ?\r\n";
 		try (Connection conn = new DBConnectMySQL().getDatabaseConnection();
 				PreparedStatement ps = conn.prepareStatement(sql)) {
 
@@ -67,7 +68,7 @@ public class ProductDaoImpl implements IProductDao {
 					if (product == null) {
 						// Tạo đối tượng ProductModel ban đầu
 						product = new ProductModel(rs.getInt("Productid"), rs.getString("Productname"),
-								rs.getString("Description"), rs.getBigDecimal("Price"), rs.getInt("Ratingcount"),
+								rs.getString("Description"), rs.getBigDecimal("Price"),
 								rs.getString("Imageurl"), images); // Ảnh chính ban đầu
 					}
 
