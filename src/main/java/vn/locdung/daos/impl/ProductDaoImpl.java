@@ -34,9 +34,9 @@ public class ProductDaoImpl implements IProductDao {
 				product.setImage(rs.getString("Imageurl"));
 
 				
-				product.setStock(rs.getInt("Stock"));
-	            product.setRating(rs.getBigDecimal("Rating"));
-	            product.setCategoryid(rs.getInt("Categoryid"));
+				//product.setStock(rs.getInt("Stock"));
+	            //product.setRating(rs.getBigDecimal("Rating"));
+	            //product.setCategoryid(rs.getInt("Categoryid"));
 				// Thêm người dùng vào danh sách
 				list.add(product);
 			}
